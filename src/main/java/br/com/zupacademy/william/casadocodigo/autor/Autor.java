@@ -23,7 +23,7 @@ public class Autor {
     private @NotBlank @Size(max = 400) String descricao;
 
     @CreationTimestamp
-    private LocalDateTime instanteCriacao = LocalDateTime.now();
+    private final LocalDateTime instanteCriacao = LocalDateTime.now();
 
     public Autor(@NotBlank String nome,
                  @NotBlank @Email String email,
@@ -32,6 +32,9 @@ public class Autor {
         this.nome = nome;
         this.descricao = descricao;
     }
+
+    @Deprecated
+    public Autor() {}
 
     public Long getId() {
         return id;
