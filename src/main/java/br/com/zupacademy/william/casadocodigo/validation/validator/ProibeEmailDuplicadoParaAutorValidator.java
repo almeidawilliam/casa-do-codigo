@@ -14,18 +14,9 @@ public class ProibeEmailDuplicadoParaAutorValidator implements ConstraintValidat
     @Autowired
     private AutorRepository autorRepository;
 
-    private String value;
-
     @Override
-    public void initialize(ProibeEmailDuplicadoParaAutor constraintAnnotation) {
-        this.value = constraintAnnotation.value();
-    }
-
-    @Override
-    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-
-        Optional<Autor> possivelAutor = autorRepository.findByEmail(s);
-
+    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
+        Optional<Autor> possivelAutor = autorRepository.findByEmail(email);
         return possivelAutor.isEmpty();
     }
 }
