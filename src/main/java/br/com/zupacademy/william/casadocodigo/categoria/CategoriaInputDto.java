@@ -1,13 +1,13 @@
 package br.com.zupacademy.william.casadocodigo.categoria;
 
-import br.com.zupacademy.william.casadocodigo.validation.annotation.ProibeNomeDuplicadoParaCategoria;
+import br.com.zupacademy.william.casadocodigo.validation.annotation.UniqueValue;
 
 import javax.validation.constraints.NotBlank;
 
 public class CategoriaInputDto {
 
     @NotBlank
-    @ProibeNomeDuplicadoParaCategoria
+    @UniqueValue(domainClass = Categoria.class, fieldName = "nome")
     private String nome;
 
     public Categoria toModel() {

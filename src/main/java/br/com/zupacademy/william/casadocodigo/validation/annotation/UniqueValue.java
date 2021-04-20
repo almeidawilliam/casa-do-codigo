@@ -1,25 +1,29 @@
 package br.com.zupacademy.william.casadocodigo.validation.annotation;
 
-import br.com.zupacademy.william.casadocodigo.validation.validator.ProibeEmailDuplicadoParaAutorValidator;
+import br.com.zupacademy.william.casadocodigo.validation.validator.UniqueValueValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({FIELD, PARAMETER})
+@Documented
+@Target({FIELD})
 @Retention(RUNTIME)
-@Constraint(validatedBy = ProibeEmailDuplicadoParaAutorValidator.class)
-public @interface ProibeEmailDuplicadoParaAutor {
+@Constraint(validatedBy = UniqueValueValidator.class)
+public @interface UniqueValue {
 
-    String message() default "Já existe um autor cadastrado com esse e-mail";
+    String message() default "";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
-    String value() default "";
+    String fieldName();
+
+    Class<?> domainClass();
 }

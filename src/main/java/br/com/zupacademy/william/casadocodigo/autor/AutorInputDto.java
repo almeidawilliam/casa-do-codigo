@@ -1,6 +1,6 @@
 package br.com.zupacademy.william.casadocodigo.autor;
 
-import br.com.zupacademy.william.casadocodigo.validation.annotation.ProibeEmailDuplicadoParaAutor;
+import br.com.zupacademy.william.casadocodigo.validation.annotation.UniqueValue;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +13,7 @@ public class AutorInputDto {
 
     @Email
     @NotBlank
-    @ProibeEmailDuplicadoParaAutor
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private final String email;
 
     @Size(max = 400)
@@ -21,7 +21,7 @@ public class AutorInputDto {
     private final String descricao;
 
     public AutorInputDto(@NotBlank String nome,
-                         @NotBlank @Email @ProibeEmailDuplicadoParaAutor String email,
+                         @NotBlank @Email String email,
                          @NotBlank @Size(max = 400) String descricao) {
         this.nome = nome;
         this.email = email;

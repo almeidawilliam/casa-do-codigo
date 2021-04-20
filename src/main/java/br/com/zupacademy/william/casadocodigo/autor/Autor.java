@@ -1,6 +1,5 @@
 package br.com.zupacademy.william.casadocodigo.autor;
 
-import br.com.zupacademy.william.casadocodigo.validation.annotation.ProibeEmailDuplicadoParaAutor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
@@ -27,7 +26,7 @@ public class Autor {
     private final LocalDateTime instanteCriacao = LocalDateTime.now();
 
     public Autor(@NotBlank String nome,
-                 @NotBlank @Email @ProibeEmailDuplicadoParaAutor String email,
+                 @NotBlank @Email String email,
                  @NotBlank @Size(max = 400) String descricao) {
         this.email = email;
         this.nome = nome;
