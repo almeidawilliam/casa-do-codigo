@@ -41,7 +41,7 @@ public class ValidationErrorHandler {
     }
 
     public String getErrorMessage(ObjectError error) {
-        boolean hasMessage = messageSource.getMessage(error, LocaleContextHolder.getLocale()).isEmpty();
+        boolean hasMessage = !messageSource.getMessage(error, LocaleContextHolder.getLocale()).isEmpty();
 
         if (hasMessage) {
             return messageSource.getMessage(error, LocaleContextHolder.getLocale());
