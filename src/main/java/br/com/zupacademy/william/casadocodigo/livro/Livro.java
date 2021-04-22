@@ -45,4 +45,12 @@ public class Livro {
         this.categoria = categoria;
         this.autor = autor;
     }
+
+    @Deprecated
+    public Livro() {
+    }
+
+    public LivroDtoApenasNome toDto() {
+        return new LivroDtoApenasNome(this.id, this.titulo);
+    }
 }
