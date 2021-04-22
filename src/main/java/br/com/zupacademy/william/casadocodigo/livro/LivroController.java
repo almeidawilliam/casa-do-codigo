@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,9 +23,21 @@ public class LivroController {
     public ResponseEntity<List<LivroDtoApenasNome>> listar() {
         TypedQuery<Livro> query = manager.createQuery("select l from Livro l", Livro.class);
         List<Livro> livros = query.getResultList();
-        List<LivroDtoApenasNome> livrosDtoApenasNome = livros.stream().map(Livro::toDto).collect(Collectors.toList());
+        List<LivroDtoApenasNome> livrosDtoApenasNome = livros.stream().map(livro -> new LivroDtoApenasNome(livro.getId(), livro.getTitulo())).collect(Collectors.toList());
 
         return ResponseEntity.ok(livrosDtoApenasNome);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscar(@PathVariable Long id) {
+        Livro livro = manager.find(Livro.class, id);
+
+        if (Objects.isNull(livro)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        LivroDtoDetalhes livroDtoDetalhes = new LivroDtoDetalhes(livro);
+        return ResponseEntity.ok(livroDtoDetalhes);
     }
 
     @PostMapping
