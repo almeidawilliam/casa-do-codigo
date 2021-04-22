@@ -21,6 +21,6 @@ public class AutorController {
     @Transactional
     public void criar(@RequestBody @Valid AutorInputDto autorInputDto) {
         Autor novoAutor = autorInputDto.toModel();
-        manager.merge(novoAutor);
+        manager.persist(novoAutor);
     }
 }
