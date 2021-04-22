@@ -1,5 +1,6 @@
 package br.com.zupacademy.william.casadocodigo.exception;
 
+import com.google.common.base.CaseFormat;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class ValidationErrorHandler {
     public ValidationErrorsOutput buildValidationErrors(List<FieldError> fieldErrors) {
 
         List<ErrorBody> erros = fieldErrors.stream()
-                .map(error -> new ErrorBody(error.getField(), getErrorMessage(error)))
+                .map(error -> new ErrorBody(toSnakeCase(error.getField()), getErrorMessage(error)))
                 .collect(Collectors.toList());
 
         return new ValidationErrorsOutput(erros);
@@ -48,5 +49,9 @@ public class ValidationErrorHandler {
         }
 
         return error.getDefaultMessage();
+    }
+
+    private String toSnakeCase(String campo) {
+        return CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, campo);
     }
 }
