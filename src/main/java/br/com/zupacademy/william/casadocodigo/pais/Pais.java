@@ -29,4 +29,16 @@ public class Pais {
     public void vincularEstado(Estado estado) {
         this.estados.add(estado);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public boolean possuiEstados() {
+        return !this.estados.isEmpty();
+    }
 }

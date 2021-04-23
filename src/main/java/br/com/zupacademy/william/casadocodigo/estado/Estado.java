@@ -40,4 +40,16 @@ public class Estado {
     public int hashCode() {
         return Objects.hash(nome, pais);
     }
+
+    public boolean pertenceAoPais(Pais pais) {
+        return this.pais.equals(pais);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
 }

@@ -32,6 +32,13 @@ public class ValidationErrorHandler {
         return buildValidationErrors(fieldErrors);
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IncompativelException.class)
+    public ValidationErrorsOutput handleIncompativelException(IncompativelException e) {
+        return buildValidationErrors(e.getMessage());
+    }
+
+
     public ValidationErrorsOutput buildValidationErrors(List<FieldError> fieldErrors) {
 
         List<ErrorBody> erros = fieldErrors.stream()
@@ -39,6 +46,10 @@ public class ValidationErrorHandler {
                 .collect(Collectors.toList());
 
         return new ValidationErrorsOutput(erros);
+    }
+
+    public ValidationErrorsOutput buildValidationErrors(String message) {
+        return new ValidationErrorsOutput(message);
     }
 
     public String getErrorMessage(ObjectError error) {
