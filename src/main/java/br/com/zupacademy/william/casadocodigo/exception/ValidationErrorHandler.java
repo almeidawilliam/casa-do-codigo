@@ -41,8 +41,8 @@ public class ValidationErrorHandler {
 
     public ValidationErrorsOutput buildValidationErrors(List<FieldError> fieldErrors) {
 
-        List<ErrorBody> erros = fieldErrors.stream()
-                .map(error -> new ErrorBody(toSnakeCase(error.getField()), getErrorMessage(error)))
+        List<ValidationErrorsOutput.ErrorBody> erros = fieldErrors.stream()
+                .map(error -> new ValidationErrorsOutput.ErrorBody(toSnakeCase(error.getField()), getErrorMessage(error)))
                 .collect(Collectors.toList());
 
         return new ValidationErrorsOutput(erros);

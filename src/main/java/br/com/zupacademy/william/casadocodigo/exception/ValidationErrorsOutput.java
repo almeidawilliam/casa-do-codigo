@@ -26,22 +26,40 @@ public class ValidationErrorsOutput {
     public List<ErrorBody> getFieldErrors() {
         return fieldErrors;
     }
+
+    static class ErrorBody {
+        private final String campo;
+        private final String mensagem;
+
+        public ErrorBody(String campo, String mensagem) {
+            this.campo = campo;
+            this.mensagem = mensagem;
+        }
+
+        public String getCampo() {
+            return campo;
+        }
+
+        public String getMensagem() {
+            return mensagem;
+        }
+    }
 }
 
-class ErrorBody {
-    private final String campo;
-    private final String mensagem;
-
-    public ErrorBody(String campo, String mensagem) {
-        this.campo = campo;
-        this.mensagem = mensagem;
-    }
-
-    public String getCampo() {
-        return campo;
-    }
-
-    public String getMensagem() {
-        return mensagem;
-    }
-}
+//class ErrorBody {
+//    private final String campo;
+//    private final String mensagem;
+//
+//    public ErrorBody(String campo, String mensagem) {
+//        this.campo = campo;
+//        this.mensagem = mensagem;
+//    }
+//
+//    public String getCampo() {
+//        return campo;
+//    }
+//
+//    public String getMensagem() {
+//        return mensagem;
+//    }
+//}
