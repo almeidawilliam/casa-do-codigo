@@ -1,12 +1,13 @@
 package br.com.zupacademy.william.casadocodigo.autor;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -14,13 +15,14 @@ import javax.validation.Valid;
 @RequestMapping("/autores")
 public class AutorController {
 
-    @PersistenceContext
-    private EntityManager manager;
+    @Autowired
+    private AutorRepository autorRepository;
 
     @PostMapping
     @Transactional
-    public void criar(@RequestBody @Valid AutorInputDto autorInputDto) {
+    public ResponseEntity<AutorOutputDto> criar(@RequestBody @Valid AutorInputDto autorInputDto) {
         Autor novoAutor = autorInputDto.toModel();
-        manager.persist(novoAutor);
+        Autor autorSalvo = autorRepository.save(novoAutor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(new AutorOutputDto(autorSalvo));
     }
 }
